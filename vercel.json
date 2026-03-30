@@ -1,1 +1,10 @@
-{}
+// Configuración simple para Vercel
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.ts",
+      "use": "@vercel/node"
+    }
+  ]
+}

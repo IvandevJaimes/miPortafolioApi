@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-import { profileService } from '../services/profileService.js';
-import { generateToken } from '../utils/jwt.js';
-import { AppError } from '../errors/AppError.js';
+import { profileService } from '../services/profileService';
+import { generateToken } from '../utils/jwt';
+import { AppError } from '../errors/AppError';
 
 interface LoginBody {
   password: string;

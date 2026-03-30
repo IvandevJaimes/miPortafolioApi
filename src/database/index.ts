@@ -1,5 +1,5 @@
 import mysql from 'mysql2/promise';
-import { config } from '../config/index.js';
+import { config } from '../config/index';
 
 export const pool = mysql.createPool({
   host: config.db.host,

@@ -1,14 +1,13 @@
-import express from "express";
-import cors from "cors";
-import morgan from "morgan";
-import helmet from "helmet";
-import rateLimit from "express-rate-limit";
-import { config } from "./config/index.js";
-import { errorHandler } from "./middleware/errorHandler.js";
-import projectsRouter from "./routes/projectsRoutes.js";
-import profileRouter from "./routes/profileRoutes.js";
-import authRouter from "./routes/authRoutes.js";
-import skillsRouter from "./routes/skillsRoutes.js";
+import express, { Request, Response } from 'express';
+import cors from 'cors';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import { config } from './config/index';
+import { errorHandler } from './middleware/errorHandler';
+import projectsRouter from './routes/projectsRoutes';
+import profileRouter from './routes/profileRoutes';
+import authRouter from './routes/authRoutes';
+import skillsRouter from './routes/skillsRoutes';
 
 const app = express();
 
@@ -39,7 +38,6 @@ const authLimiter = rateLimit({
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
-app.use(morgan("dev"));
 
 app.use(generalLimiter);
 app.use("/auth", authLimiter);
@@ -49,17 +47,14 @@ app.use("/profile", profileRouter);
 app.use("/auth", authRouter);
 app.use("/skills", skillsRouter);
 
-app.get("/health", (req, res) => {
+app.get("/health", (req: Request, res: Response) => {
   res.json({ status: "ok" });
 });
 
-app.use((req, res) => {
+app.use((req: Request, res: Response) => {
   res.status(404).json({ success: false, error: "Ruta no encontrada" });
 });
 
 app.use(errorHandler);
 
-app.listen(config.port, () => {
-  const portStr = String(config.port);
-  console.log(`Servidor en puerto ${portStr}`);
-});
+export default app;

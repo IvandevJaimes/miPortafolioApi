@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcrypt';
-import { profileService } from '../services/profileService.js';
-import { AppError } from '../errors/AppError.js';
-import { uploadToCloudinary, uploadDocumentToCloudinary } from '../middleware/upload.js';
+import { profileService } from '../services/profileService';
+import { AppError } from '../errors/AppError';
+import { uploadToCloudinary, uploadDocumentToCloudinary } from '../middleware/upload';
 
 interface ProfileBody {
   current_password?: string;
