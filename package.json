@@ -10,6 +10,7 @@
     "lint": "eslint src/**/*.ts"
   },
   "dependencies": {
+    "@vercel/node": "^5.6.22",
     "bcrypt": "^6.0.0",
     "cloudinary": "^2.9.0",
     "cors": "^2.8.6",
