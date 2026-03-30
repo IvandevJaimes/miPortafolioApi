@@ -1,16 +1,16 @@
-import { Router } from 'express';
-import multer from 'multer';
-import { profileController } from '../controllers/profileController';
-import { authenticate } from '../middleware/auth';
+import { Router } from "express";
+import multer from "multer";
+import { profileController } from "../controllers/profileController";
+import { authenticate } from "../middleware/auth";
 
 const router = Router();
 
-const upload = multer({ 
+const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 10 * 1024 * 1024 }
+  limits: { fileSize: 10 * 1024 * 1024 },
 });
 
-router.get('/', authenticate, profileController.get);
-router.put('/', authenticate, upload.any(), profileController.update);
+router.get("/", profileController.get);
+router.put("/", authenticate, upload.any(), profileController.update);
 
 export default router;
