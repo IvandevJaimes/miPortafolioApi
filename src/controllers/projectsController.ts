@@ -10,6 +10,7 @@ interface ProjectBody {
   description?: string;
   github?: string;
   github_backend?: string;
+  github_crud?: string;
   demo?: string;
   featured?: string | boolean;
   tags?: string | string[];
@@ -93,6 +94,7 @@ export const projectController = {
         description: body.description || undefined,
         github: body.github || undefined,
         github_backend: body.github_backend || undefined,
+        github_crud: body.github_crud || undefined,
         demo: body.demo || undefined,
         featured: body.featured === "true" || body.featured === true,
         tags: parsedTags,
@@ -178,6 +180,7 @@ export const projectController = {
         description: body.description || undefined,
         github: body.github || undefined,
         github_backend: body.github_backend || undefined,
+        github_crud: body.github_crud || undefined,
         demo: body.demo || undefined,
         featured,
         tags,

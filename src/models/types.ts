@@ -4,6 +4,7 @@ export interface Project {
   description: string | null;
   github: string | null;
   github_backend: string | null;
+  github_crud: string | null;
   demo: string | null;
   featured: boolean;
   created_at: Date;

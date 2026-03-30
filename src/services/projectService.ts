@@ -70,6 +70,7 @@ export const projectService = {
     description?: string;
     github?: string;
     github_backend?: string;
+    github_crud?: string;
     demo?: string;
     featured?: boolean;
     tags?: string[];
@@ -81,12 +82,13 @@ export const projectService = {
       await connection.beginTransaction();
 
       const [result] = await connection.query(
-        `INSERT INTO projects (title, description, github, github_backend, demo, featured) VALUES (?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO projects (title, description, github, github_backend, github_crud, demo, featured) VALUES (?, ?, ?, ?, ?, ?, ?)`,
         [
           data.title,
           data.description || null,
           data.github || null,
           data.github_backend || null,
+          data.github_crud || null,
           data.demo || null,
           data.featured || false,
         ],
@@ -179,6 +181,7 @@ export const projectService = {
       description?: string;
       github?: string;
       github_backend?: string;
+      github_crud?: string;
       demo?: string;
       featured?: boolean;
       tags?: string[];
@@ -217,6 +220,10 @@ export const projectService = {
       if (data.github_backend !== undefined) {
         updateFields.push("github_backend = ?");
         updateValues.push(data.github_backend || null);
+      }
+      if (data.github_crud !== undefined) {
+        updateFields.push("github_crud = ?");
+        updateValues.push(data.github_crud || null);
       }
       if (data.demo !== undefined) {
         updateFields.push("demo = ?");
