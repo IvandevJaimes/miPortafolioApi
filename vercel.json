@@ -2,8 +2,16 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/test.ts",
+      "src": "dist/index.js",
       "use": "@vercel/node"
     }
-  ]
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/index.js"
+    }
+  ],
+  "buildCommand": "npm run build",
+  "installCommand": "npm install"
 }
