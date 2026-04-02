@@ -1,13 +1,13 @@
-import express, { Request, Response } from 'express';
-import cors from 'cors';
-import helmet from 'helmet';
-import rateLimit from 'express-rate-limit';
-import { config } from './config/index';
-import { errorHandler } from './middleware/errorHandler';
-import projectsRouter from './routes/projectsRoutes';
-import profileRouter from './routes/profileRoutes';
-import authRouter from './routes/authRoutes';
-import skillsRouter from './routes/skillsRoutes';
+import express, { Request, Response } from "express";
+import cors from "cors";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
+import { config } from "./config/index";
+import { errorHandler } from "./middleware/errorHandler";
+import projectsRouter from "./routes/projectsRoutes";
+import profileRouter from "./routes/profileRoutes";
+import authRouter from "./routes/authRoutes";
+import skillsRouter from "./routes/skillsRoutes";
 
 const app = express();
 
@@ -39,7 +39,7 @@ app.use(cors());
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, limit: "10mb" }));
 
-app.use(generalLimiter);
+//app.use(generalLimiter);
 app.use("/auth", authLimiter);
 
 app.use("/projects", projectsRouter);
