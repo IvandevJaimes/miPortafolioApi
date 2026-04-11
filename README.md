@@ -1,73 +1,107 @@
-# React + TypeScript + Vite
+# API del Portafolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+API REST desarrollada con Express y TypeScript para gestionar el portafolio personal.
 
-Currently, two official plugins are available:
+## Tecnologias
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Runtime:** Node.js
+- **Framework:** Express.js 5
+- **Lenguaje:** TypeScript
+- **Base de datos:** MySQL (mysql2)
+- **Autenticacion:** JWT (jsonwebtoken) + bcrypt
 
-## React Compiler
+## Librerías
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### Dependencies
+- bcrypt - Hash de contraseñas
+- cloudinary - Almacenamiento de imagenes
+- cors - CORS middleware
+- dotenv - Variables de entorno
+- express-rate-limit - Limitacion de peticiones
+- helmet - Headers de seguridad
+- jsonwebtoken - Tokens JWT
+- morgan - Logging de requests
+- multer - Upload de archivos
+- mysql2 - Driver MySQL
+- resend - Envío de emails
+- zod - Validación de datos
 
-## Expanding the ESLint configuration
+### Dev Dependencies
+- typescript
+- tsx - Ejecución de TypeScript
+- eslint + @typescript-eslint
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Estructura del Proyecto
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── config/          # Configuracion (DB, variables de entorno, rate limiters)
+├── controllers/    # Controladores (logica de negocio)
+├── database/       # Conexion a MySQL
+├── errors/         # Errores personalizados
+├── middleware/    # Middlewares (auth, upload, error handling)
+├── models/         # Tipos e interfaces
+├── routes/        # Rutas de la API
+├── services/       # Acceso a datos
+├── templates/      # Plantillas HTML para emails
+└── utils/         # Utilidades (JWT, validación de ID)
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Endpoints
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Ruta | Metodo | Descripcion | Autenticacion |
+|------|-------|-----------|------------|
+| /projects | GET | Listar proyectos | No |
+| /projects/:id | GET | Obtener proyecto | No |
+| /projects | POST | Crear proyecto | Si |
+| /projects/:id | PUT | Actualizar proyecto | Si |
+| /projects/:id | DELETE | Eliminar proyecto | Si |
+| /profile | GET | Obtener perfil | No |
+| /profile | PUT | Actualizar perfil | Si |
+| /auth/login | POST | Iniciar sesion | No |
+| /skills | GET | Listar skills | No |
+| /skills/categories | POST | Crear categoria | Si |
+| /skills/skills | POST | Crear skill | Si |
+| /contact | GET | Listar mensajes | Si |
+| /contact | POST | Enviar mensaje | No |
+| /contact/:id | GET | Ver mensaje | Si |
+| /contact/:id/read | PUT | Marcar como leido | Si |
+| /contact/:id | DELETE | Eliminar mensaje | Si |
+| /health | GET | Estado del servidor | No |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Seguridad
+
+- Helmet para headers de seguridad
+- Rate limiting (general, auth, contact)
+- Autenticacion JWT en rutas protegidas
+- Validacion de entrada con Zod
+- Manejo centralizado de errores
+
+## Instalacion
+
+```bash
+npm install
 ```
+
+## Desarrollo
+
+```bash
+npm run dev
+```
+
+El servidor corre en `http://localhost:3000`.
+
+## Produccion
+
+```bash
+npm run build
+npm start
+```
+
+## Variables de Entorno
+
+Ver `.env.example` para las variables requeridas.
+
+## Base de Datos
+
+El schema de la base de datos esta en `schema.sql`.
