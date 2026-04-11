@@ -4,6 +4,7 @@ import { idValidator } from "../utils/idValidator";
 import { AppError } from "../errors/AppError.js";
 import { NotFoundError } from "../errors/AppError.js";
 import { contactSchema } from "../services/contactService.js";
+import { sendContactNotification } from "../services/emailService.js";
 
 export const contactController = {
   getAll: async (req: Request, res: Response, next: NextFunction) => {
@@ -37,6 +38,10 @@ export const contactController = {
       const validated = contactSchema.parse(req.body);
 
       const message = await contactService.create(validated);
+      
+      // Enviar notificación por email
+      await sendContactNotification(validated.name, validated.email, validated.message);
+      
       res.status(201).json({ success: true, data: message });
     } catch (error: unknown) {
       const zodError = error as { name: string; errors: { message: string }[] };

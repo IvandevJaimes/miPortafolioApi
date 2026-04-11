@@ -20,4 +20,9 @@ export const config = {
     apiKey: process.env.CLOUDINARY_API_KEY || "",
     apiSecret: process.env.CLOUDINARY_API_SECRET || "",
   },
+  resend: {
+    apiKey: process.env.RESEND_API_KEY || "",
+    from: "Portafolio <onboarding@resend.dev>",
+    to: process.env.ADMIN_EMAIL || "",
+  },
 };
