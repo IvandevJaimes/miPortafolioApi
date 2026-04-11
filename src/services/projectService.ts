@@ -73,6 +73,8 @@ export const projectService = {
     github_crud?: string;
     demo?: string;
     featured?: boolean;
+    deployed?: boolean;
+    monorepo?: string;
     tags?: string[];
     images?: { url: string; alt: string }[];
   }): Promise<Project> {
@@ -82,7 +84,7 @@ export const projectService = {
       await connection.beginTransaction();
 
       const [result] = await connection.query(
-        `INSERT INTO projects (title, description, github, github_backend, github_crud, demo, featured) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        `INSERT INTO projects (title, description, github, github_backend, github_crud, demo, featured, deployed, monorepo) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           data.title,
           data.description || null,
@@ -91,6 +93,8 @@ export const projectService = {
           data.github_crud || null,
           data.demo || null,
           data.featured || false,
+          data.deployed ?? null,
+          data.monorepo || null,
         ],
       );
 
@@ -184,6 +188,8 @@ export const projectService = {
       github_crud?: string;
       demo?: string;
       featured?: boolean;
+      deployed?: boolean;
+      monorepo?: string;
       tags?: string[];
       images?: { url: string; alt: string }[];
     },
@@ -232,6 +238,14 @@ export const projectService = {
       if (data.featured !== undefined) {
         updateFields.push("featured = ?");
         updateValues.push(data.featured);
+      }
+      if (data.deployed !== undefined) {
+        updateFields.push("deployed = ?");
+        updateValues.push(data.deployed);
+      }
+      if (data.monorepo !== undefined) {
+        updateFields.push("monorepo = ?");
+        updateValues.push(data.monorepo || null);
       }
 
       if (updateFields.length > 0) {

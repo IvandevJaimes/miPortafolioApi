@@ -7,6 +7,8 @@ export interface Project {
   github_crud: string | null;
   demo: string | null;
   featured: boolean;
+  deployed: boolean;
+  monorepo: string | null;
   created_at: Date;
 }
 

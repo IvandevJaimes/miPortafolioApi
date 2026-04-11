@@ -13,6 +13,8 @@ interface ProjectBody {
   github_crud?: string;
   demo?: string;
   featured?: string | boolean;
+  deployed?: string | boolean;
+  monorepo?: string;
   tags?: string | string[];
   alt?: string;
 }
@@ -97,6 +99,8 @@ export const projectController = {
         github_crud: body.github_crud || undefined,
         demo: body.demo || undefined,
         featured: body.featured === "true" || body.featured === true,
+        deployed: body.deployed === "true" || body.deployed === true,
+        monorepo: body.monorepo || undefined,
         tags: parsedTags,
         images: images.length ? images : [],
       };
@@ -175,6 +179,16 @@ export const projectController = {
               : undefined;
       }
 
+      let deployed: boolean | undefined;
+      if (body.deployed !== undefined) {
+        deployed =
+          body.deployed === "true" || body.deployed === true
+            ? true
+            : body.deployed === "false" || body.deployed === false
+              ? false
+              : undefined;
+      }
+
       const data = {
         title: body.title,
         description: body.description || undefined,
@@ -183,6 +197,8 @@ export const projectController = {
         github_crud: body.github_crud || undefined,
         demo: body.demo || undefined,
         featured,
+        deployed,
+        monorepo: body.monorepo || undefined,
         tags,
         images,
       };
