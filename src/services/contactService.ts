@@ -4,9 +4,9 @@ import { z } from "zod";
 
 // Schema de validación con Zod
 export const contactSchema = z.object({
-  name: z.string().min(1, "El nombre es requerido").max(255),
+  name: z.string().min(1, "El nombre es requerido").min(2).max(100),
   email: z.string().email("Email inválido").max(255),
-  message: z.string().min(1, "El mensaje es requerido"),
+  message: z.string().min(1, "El mensaje es requerido").max(2000),
 });
 
 export type ContactInput = z.infer<typeof contactSchema>;
