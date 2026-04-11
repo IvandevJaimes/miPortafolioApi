@@ -82,3 +82,12 @@ export interface Skill {
 export interface SkillWithCategory extends Skill {
   category_label: string;
 }
+
+export interface ContactMessage {
+  id: number;
+  name: string;
+  email: string;
+  message: string;
+  created_at: Date;
+  readed_at: Date | null;
+}

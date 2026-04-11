@@ -8,6 +8,7 @@ import projectsRouter from "./routes/projectsRoutes";
 import profileRouter from "./routes/profileRoutes";
 import authRouter from "./routes/authRoutes";
 import skillsRouter from "./routes/skillsRoutes";
+import contactRouter from "./routes/contactRoutes";
 
 const app = express();
 
@@ -46,6 +47,7 @@ app.use("/projects", projectsRouter);
 app.use("/profile", profileRouter);
 app.use("/auth", authRouter);
 app.use("/skills", skillsRouter);
+app.use("/contact", contactRouter);
 
 app.get("/health", (req: Request, res: Response) => {
   res.json({ status: "ok" });
@@ -57,4 +59,6 @@ app.use((req: Request, res: Response) => {
 
 app.use(errorHandler);
 
+const PORT = config.port;
+app.listen(PORT, () => {});
 export default app;

@@ -82,3 +82,15 @@ CREATE TABLE IF NOT EXISTS skills (
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   FOREIGN KEY (category_id) REFERENCES skill_categories(id) ON DELETE CASCADE
 );
+
+-- -----------------------------------------------------
+-- Tabla: contact_messages
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS contact_messages (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  message TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  readed_at DATETIME NULL
+);
