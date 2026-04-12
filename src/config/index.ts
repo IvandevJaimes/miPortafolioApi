@@ -25,4 +25,10 @@ export const config = {
     from: "Portafolio <onboarding@resend.dev>",
     to: process.env.ADMIN_EMAIL || "",
   },
+  cors: {
+    allowedOrigins: [
+      process.env.CORS_ORIGIN_1?.trim(),
+      process.env.CORS_ORIGIN_2?.trim(),
+    ].filter(Boolean) as string[],
+  },
 };
