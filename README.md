@@ -2,6 +2,8 @@
 
 API REST desarrollada con Express y TypeScript para gestionar el portafolio personal.
 
+● Repo frontend: https://github.com/IvandevJaimes/miPortafolio
+
 ## Tecnologias
 
 - **Runtime:** Node.js
